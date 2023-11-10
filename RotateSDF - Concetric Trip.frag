@@ -30,10 +30,11 @@ vec3 palette( float t )
 }
 
 // PARAMS
-#define SCALE 0.08
+#define SCALE 0.07
 #define ROT_SPEED 0.05
 #define COLOUR_SPEED 0.1
 #define COLOUR_GRAD_LENGTH 0.04
+#define BRIGHTNESS 0.08
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
@@ -53,7 +54,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         b = step(0.0, b);
         b = 1.0 - b;
 
-        col += 0.05 * b * palette(iTime * COLOUR_SPEED + float(i) * COLOUR_GRAD_LENGTH);
+        col += BRIGHTNESS * b * palette(iTime * COLOUR_SPEED + float(i) * COLOUR_GRAD_LENGTH);
     }
 
     // Output to screen
