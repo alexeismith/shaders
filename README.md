@@ -35,7 +35,7 @@ Shaders made as part of step-by-step tutorials.
 
 [The Book of Shaders](https://thebookofshaders.com/)
 
-### Tools
+### Online Tools
 
 [Graphtoy](https://graphtoy.com/)
 
