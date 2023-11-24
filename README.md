@@ -1,4 +1,13 @@
-# Alexei's Shader Library!
+# shaders!
+
+<div class="row">
+    <img src="https://github.com/alexeismith/shaders/blob/main/screenshots/Concentric%20Wobble.png" width="100">
+    <img src="https://github.com/alexeismith/shaders/blob/main/screenshots/Gradient%20Palette%20Animation.png" width="100">
+    <img src="https://github.com/alexeismith/shaders/blob/main/screenshots/Neon%20Sine%20Shrink.png" width="100">
+    <img src="https://github.com/alexeismith/shaders/blob/main/screenshots/Radial%20Gradient%20Lines.png" width="100">
+    <img src="https://github.com/alexeismith/shaders/blob/main/screenshots/Rounded%20Wobble%20Star.png" width="100">
+    <img src="https://github.com/alexeismith/shaders/blob/main/screenshots/Shader%20Art%20Intro.png" width="100">
+</div>
 
 A place for learning and experimentation with GLSL pixel shaders.
 
