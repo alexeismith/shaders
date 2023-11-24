@@ -1,4 +1,4 @@
-#define PI 3.14159265358
+#define PI 3.14159265359
 
 // https://iquilezles.org/articles/distfunctions2d/
 float sdPentagon( in vec2 p, in float r )

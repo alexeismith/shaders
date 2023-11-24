@@ -1,4 +1,4 @@
-#define PI 3.14159265358
+#define PI 3.14159265359
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {

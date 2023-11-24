@@ -1,4 +1,4 @@
-#define PI 3.14159265358
+#define PI 3.14159265359
 
 // PARAMS
 #define RADIUS 0.4
