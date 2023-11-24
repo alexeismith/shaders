@@ -11,17 +11,17 @@
 
 A place for learning and experimentation with GLSL pixel shaders.
 
-#### building-blocks
-
-Small shaders that centre around one technique which can be reused elsewhere.
-
 #### experiments
 
-A sandbox area, containing more complex shaders which combine multiple techniques.
+A sandbox area for exploring various ideas.
+
+#### techniques
+
+Simpler shaders that centre around one reusable technique.
 
 #### tools
 
-Examples of utility functions for debugging and general development.
+Utility functions for debugging and general development.
 
 #### tutorials
 
