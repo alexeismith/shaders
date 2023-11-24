@@ -27,6 +27,13 @@ Utility functions for debugging and general development.
 
 Shaders made as part of step-by-step tutorials.
 
+## Setup
+
+1. Install the [Shader Toy](https://marketplace.visualstudio.com/items?itemName=stevensona.shader-toy) extension for VS Code 
+2. Open a shader in VS Code
+3. Inside the file, right-click -> Shader Toy: Show GLSL Preview
+4. Drag the preview tab to the side to get a split view
+
 ## Learning Resources
 
 [An introduction to Shader Art Coding](https://www.youtube.com/watch?v=f4s1h2YETNY)
