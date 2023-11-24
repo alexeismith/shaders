@@ -46,6 +46,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
     float b;
 
+    // Keep rotating the same UVs so outer shapes move further 
     for (int i = 1; i < 20; i++)
     {
         uv = rotateUV(uv, iTime * PI * ROT_SPEED, vec2(0.0));
