@@ -1,6 +1,7 @@
 // PARAMETERS
 #define SPEED (0.5)
 #define SPIRAL (1.5)
+#define SIZE (0.13)
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
@@ -19,18 +20,24 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     // Uncomment this line to disable pulse:
     // pulse = time;
 
+    // Animate distance from origin
     float anim1 = d - pulse * 0.1;
     float anim2 = d - pulse * 0.2;
 
-    vec3 col = vec3(mod(anim1,0.1)*10.0,mod(anim2,0.1)*10.0,mod(anim2,0.1)*10.0);
+    // Convert to concentric circles moving outwards
+    anim1 = mod(anim1, SIZE)*10.0;
+    anim2 = mod(anim2, SIZE)*10.0;
 
+    // Animate colour components
+    vec3 col = vec3(anim1,anim2,anim2);
+
+    // Measure distance around circle circumference
     float a = atan(uv.y, uv.x);
 
-    float mag1 = 0.5 * (sin(a + (d * SPIRAL) + time * 5.0) + 1.0);
-
+    // Multiply green and blue components by animated spiral
     col.g *= 0.5 * (sin(a + (d * SPIRAL) - time * 5.0) + 1.0);
     col.b *= 0.5 * (sin(a + (d * SPIRAL) + time * 7.0) + 1.0);
 
     // Output to screen
-    fragColor = vec4(col,1.0);
+    fragColor = vec4(col, 1.0);
 }
