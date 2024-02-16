@@ -29,10 +29,10 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     // Step 3: Add a rotation
     // float r = RADIUS + 0.1*cos(atan(uv.y, uv.x) * float(NUM_POINTS) + iTime);
     
-    // Step 4: Add an oscillation
-    float amp = 10.0 * (sin(iTime * 2.0));
-    // Multiply the oscillation by the distance from the centre
-    float r = RADIUS + 0.1*cos(atan(uv.y, uv.x) * float(NUM_POINTS) + iTime - d * amp);
+    // Step 4: Add another oscillation to wobble the star
+    float wobble = 10.0 * (sin(iTime * 2.0));
+    // Multiply the oscillation by the distance from the centre, to give the illusion of bending
+    float r = RADIUS + 0.1*cos(atan(uv.y, uv.x) * float(NUM_POINTS) + iTime + d * wobble);
 
     // Apply SDF to colour
     col *= smoothstep(r, r + FEATHER, d);
