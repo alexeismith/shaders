@@ -1,7 +1,6 @@
 // PARAMETERS
 #define SPEED (0.5)
-#define DISTANCE (1.2)
-#define SIZE (0.2)
+#define SIZE (0.1)
 
 float bounceOut(float t) {
     const float a = 4.0 / 11.0;
@@ -30,7 +29,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     float anim = mod(iTime * SPEED, 1.0);
 
     // Translate y-axis using animation
-    uv.y += DISTANCE * (bounceOut(anim) - 1.0);
+    uv.y += 2.0 * (bounceOut(anim) - 0.5) - SIZE;
 
     // Measure distance from (translated) origin
     float d = length(uv - vec2(0, 0));

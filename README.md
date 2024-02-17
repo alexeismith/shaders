@@ -1,6 +1,7 @@
 # shaders!
 
 <div class="row">
+    <img src="screenshots/Bouncing Balls.png" width="100">
     <img src="screenshots/Hypnotize.png" width="100">
     <img src="screenshots/Concentric%20Wobble.png" width="100">
     <img src="screenshots/Gradient%20Palette%20Animation.png" width="100">

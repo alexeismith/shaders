@@ -1,11 +1,11 @@
 // PARAMETERS
 #define SPEED (0.5)
-#define DISTANCE (1.2)
-#define SIZE (0.1)
-#define NUM_BALLS (6)
+#define SIZE (0.2)
+#define NUM_BALLS (15)
 #define TIME_OFFSET (0.3)
 
-float bounceOut(float t) {
+float bounceOut(float t)
+{
     const float a = 4.0 / 11.0;
     const float b = 8.0 / 11.0;
     const float c = 9.0 / 10.0;
@@ -27,7 +27,8 @@ float random(vec2 normSeed)
     return fract(sin(dot(normSeed.xy, vec2(12.9898, 78.233))) * 43758.5453123);
 }
 
-vec3 hsb2rgb(in vec3 c) {
+vec3 hsb2rgb(in vec3 c)
+{
     vec3 rgb = clamp(abs(mod(c.x * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0);
     rgb = rgb * rgb * (3.0 - 2.0 * rgb); // cubic smoothing
     return c.z * mix(vec3(1.0), rgb, c.y);
@@ -40,7 +41,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
 
     // Slowly animate dark background colour
-    vec3 col = hsb2rgb(vec3(iTime * 0.05, 0.5, 0.2));
+    vec3 col = hsb2rgb(vec3(iTime * 0.02, 0.5, 0.15));
 
     float xOffset, timeOffset, anim, d;
     vec2 uvTrans, fillSeed;
@@ -64,7 +65,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
         anim = mod(iTime * SPEED + timeOffset, 1.0);
 
         // Translate y-axis using animation
-        uvTrans.y += DISTANCE * (bounceOut(anim) - 1.0);
+        uvTrans.y += 2.0 * (bounceOut(anim) - 0.5) - SIZE;
 
         // Measure distance from (translated) origin
         d = length(uvTrans - vec2(0, 0));
@@ -75,7 +76,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
         // then offset again by i to give each ball a different colour
         fillSeed = vec2(round(iTime * SPEED + timeOffset + 0.5 + float(i)), 0.0);
         // Generate the random fill colour
-        fill = hsb2rgb(vec3(random(fillSeed), 1.0, 1.0));
+        fill = hsb2rgb(vec3(random(fillSeed), 0.8, 0.7));
 
         // Multiply fill colour by circle SDF
         col += fill * vec3(step(d, SIZE));
