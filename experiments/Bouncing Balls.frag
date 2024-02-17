@@ -1,6 +1,9 @@
 // PARAMETERS
 #define SPEED (0.5)
 #define DISTANCE (1.2)
+#define SIZE (0.1)
+#define NUM_BALLS (6)
+#define TIME_OFFSET (0.3)
 
 float bounceOut(float t) {
   const float a = 4.0 / 11.0;
@@ -28,27 +31,36 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     // Also account for aspect ratio to avoid stretching
     vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
 
-    vec2 uvLeft = uv;
-    uvLeft.x -= 0.3;
+    vec3 col;
+    vec2 uvTrans;
+    float xOffset, timeOffset, anim, d;
 
-    vec2 uvRight = uv;
-    uvRight.x += 0.3;
+    // Iterate over balls
+    for (int i = 0; i < NUM_BALLS; i++)
+    {
+        // Distribute balls across x-axis
+        xOffset = 1.0 - (2.0 / float(NUM_BALLS + 1)) * float(i + 1);
 
-    // Animate value in range 0-1
-    float anim1 = mod(iTime * SPEED, 1.0);
-    float anim2 = mod(iTime * SPEED + 0.4, 1.0);
+        // Create translated uv for this ball
+        uvTrans = uv;
+        // Not sure why xOffset goes from right to left, check axes
+        uvTrans.x -= xOffset;
 
-    // Translate y-axis using animation
-    uvLeft.y += DISTANCE * (bounceOut(anim1) - 1.0);
-    uvRight.y += DISTANCE * (bounceOut(anim2) - 1.0);
+        // Create time offset for this ball
+        timeOffset = TIME_OFFSET * float(i);
 
-    // Measure distance from (translated) origin
-    float dLeft = length(uvLeft - vec2(0,0));
-    float dRight = length(uvRight - vec2(0,0));
+        // Animate value in range 0-1
+        anim = mod(iTime * SPEED + timeOffset, 1.0);
 
-    // Draw circle SDF
-    vec3 col = vec3(step(dLeft, 0.1));
-    col += vec3(step(dRight, 0.1));
+        // Translate y-axis using animation
+        uvTrans.y += DISTANCE * (bounceOut(anim) - 1.0);
+
+        // Measure distance from (translated) origin
+        d = length(uvTrans - vec2(0,0));
+
+        // Draw circle SDF
+        col += vec3(step(d, SIZE));
+    }
 
     // Output to screen
     fragColor = vec4(col,1.0);

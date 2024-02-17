@@ -1,6 +1,7 @@
 // PARAMETERS
 #define SPEED (0.5)
 #define DISTANCE (1.2)
+#define SIZE (0.2)
 
 float bounceOut(float t) {
   const float a = 4.0 / 11.0;
@@ -38,7 +39,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     float d = length(uv - vec2(0,0));
 
     // Draw circle SDF
-    vec3 col = vec3(step(d, 0.1));
+    vec3 col = vec3(step(d, SIZE));
 
     // Output to screen
     fragColor = vec4(col,1.0);
