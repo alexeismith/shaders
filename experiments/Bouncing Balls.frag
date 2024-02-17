@@ -27,15 +27,24 @@ float random(vec2 normSeed)
     return fract(sin(dot(normSeed.xy, vec2(12.9898, 78.233))) * 43758.5453123);
 }
 
+vec3 hsb2rgb(in vec3 c) {
+    vec3 rgb = clamp(abs(mod(c.x * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0);
+    rgb = rgb * rgb * (3.0 - 2.0 * rgb); // cubic smoothing
+    return c.z * mix(vec3(1.0), rgb, c.y);
+}
+
 void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {
     // Normalise resolution to +/-1 canvas with centred origin
     // Also account for aspect ratio to avoid stretching
     vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
 
-    vec3 col;
-    vec2 uvTrans;
+    // Slowly animate dark background colour
+    vec3 col = hsb2rgb(vec3(iTime * 0.05, 0.5, 0.2));
+
     float xOffset, timeOffset, anim, d;
+    vec2 uvTrans, fillSeed;
+    vec3 fill;
 
     // Iterate over balls
     for (int i = 0; i < NUM_BALLS; i++)
@@ -60,8 +69,16 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
         // Measure distance from (translated) origin
         d = length(uvTrans - vec2(0, 0));
 
-        // Draw circle SDF
-        col += vec3(step(d, SIZE));
+        // Create a seed for the random fill colour
+        // It needs to change in time with the ball's lifespan
+        // So use the timeOffset for this ball,
+        // then offset again by i to give each ball a different colour
+        fillSeed = vec2(round(iTime * SPEED + timeOffset + 0.5 + float(i)), 0.0);
+        // Generate the random fill colour
+        fill = hsb2rgb(vec3(random(fillSeed), 1.0, 1.0));
+
+        // Multiply fill colour by circle SDF
+        col += fill * vec3(step(d, SIZE));
     }
 
     // Output to screen
