@@ -1,15 +1,17 @@
 # shaders!
 
 <div class="row">
-    <img src="https://github.com/alexeismith/shaders/blob/main/screenshots/Concentric%20Wobble.png" width="100">
-    <img src="https://github.com/alexeismith/shaders/blob/main/screenshots/Gradient%20Palette%20Animation.png" width="100">
-    <img src="https://github.com/alexeismith/shaders/blob/main/screenshots/Neon%20Sine%20Shrink.png" width="100">
-    <img src="https://github.com/alexeismith/shaders/blob/main/screenshots/Radial%20Gradient%20Lines.png" width="100">
-    <img src="https://github.com/alexeismith/shaders/blob/main/screenshots/Rounded%20Wobble%20Star.png" width="100">
-    <img src="https://github.com/alexeismith/shaders/blob/main/screenshots/Shader%20Art%20Intro.png" width="100">
+    <img src="screenshots/Concentric%20Wobble.png" width="100">
+    <img src="screenshots/Gradient%20Palette%20Animation.png" width="100">
+    <img src="screenshots/Neon%20Sine%20Shrink.png" width="100">
+    <img src="screenshots/Radial%20Gradient%20Lines.png" width="100">
+    <img src="screenshots/Rounded%20Wobble%20Star.png" width="100">
+    <img src="screenshots/Shader%20Art%20Intro.png" width="100">
 </div>
 
 A place for learning and experimentation with GLSL pixel shaders.
+
+### Folder Structure
 
 #### experiments
 
@@ -29,10 +31,16 @@ Shaders made as part of step-by-step tutorials.
 
 ## Setup
 
-1. Install the [Shader Toy](https://marketplace.visualstudio.com/items?itemName=stevensona.shader-toy) extension for VS Code 
-2. Open a shader in VS Code
+This repo is designed to be used with VS Code.
+
+1. In VS Code, install the [Shader Toy](https://marketplace.visualstudio.com/items?itemName=stevensona.shader-toy) extension
+2. Open a shader file (.frag)
 3. Inside the file, right-click -> Shader Toy: Show GLSL Preview
-4. Drag the preview tab to the side to get a split view
+4. Drag the new tab to the side to get a split view
+
+For auto-formatting in VS Code:
+1. Install the [glsl_analyzer](https://marketplace.visualstudio.com/items?itemName=nolanderc.glsl-analyzer) extension
+2. When editing a file, press ALT+SHIFT+F 
 
 ## Learning Resources
 
