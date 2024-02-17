@@ -3,14 +3,14 @@
 #define SPIRAL (1.5)
 #define SIZE (0.13)
 
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {
     // Normalise resolution to +/-1 canvas with centred origin
     // Also account for aspect ratio to avoid stretching
     vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
 
     // Measure distance from centred origin
-    float d = length(uv - vec2(0,0));
+    float d = length(uv - vec2(0, 0));
 
     // Scale time based on parameter
     float time = SPEED * iTime;
@@ -25,11 +25,11 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     float anim2 = d - pulse * 0.2;
 
     // Convert to concentric circles moving outwards
-    anim1 = mod(anim1, SIZE)*10.0;
-    anim2 = mod(anim2, SIZE)*10.0;
+    anim1 = mod(anim1, SIZE) * 10.0;
+    anim2 = mod(anim2, SIZE) * 10.0;
 
     // Animate colour components
-    vec3 col = vec3(anim1,anim2,anim2);
+    vec3 col = vec3(anim1, anim2, anim2);
 
     // Measure distance around circle circumference
     float a = atan(uv.y, uv.x);

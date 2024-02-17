@@ -3,11 +3,11 @@
 
 vec3 rotateHue(in vec3 col, in float rot)
 {
-    vec3 p = vec3(0.55735)*dot(vec3(0.55735),col);
-    vec3 u = col-p;
-    vec3 v = cross(vec3(0.55735),u);    
+    vec3 p = vec3(0.55735) * dot(vec3(0.55735), col);
+    vec3 u = col - p;
+    vec3 v = cross(vec3(0.55735), u);
 
-    return u*cos(rot*6.2832) + v*sin(rot*6.2832) + p;
+    return u * cos(rot * 6.2832) + v * sin(rot * 6.2832) + p;
 }
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord)
@@ -41,7 +41,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     blue = rotateHue(blue, 0.05 * sin(iTime * SPEED * 0.5));
 
     // Blue extends further
-    blue *= -atan(uv.y, uv.x + 0.1) / (2.0* PI) + 0.5;
+    blue *= -atan(uv.y, uv.x + 0.1) / (2.0 * PI) + 0.5;
 
     vec3 col = red + blue;
     col *= 1.05; // Adjust brightness

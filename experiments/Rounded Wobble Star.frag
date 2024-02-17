@@ -5,7 +5,7 @@
 #define FEATHER 0.01
 #define NUM_POINTS 8
 
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {
     // Normalise resolution to +/-1 canvas with centred origin
     // Also account for aspect ratio to avoid stretching
@@ -22,17 +22,17 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     // Then shift to +-1.0
     // Uncomment to visualise:
     // col *= atan(uv.y, uv.x) / (2.0 * PI) + 0.5;
-    
+
     // Step 2: Use atan as input to cosine, to oscillate around circle
     // float r = RADIUS + 0.1*cos(atan(uv.y, uv.x) * float(NUM_POINTS));
 
     // Step 3: Add a rotation
     // float r = RADIUS + 0.1*cos(atan(uv.y, uv.x) * float(NUM_POINTS) + iTime);
-    
+
     // Step 4: Add another oscillation to wobble the star
     float wobble = 10.0 * (sin(iTime * 2.0));
     // Multiply the oscillation by the distance from the centre, to give the illusion of bending
-    float r = RADIUS + 0.1*cos(atan(uv.y, uv.x) * float(NUM_POINTS) + iTime + d * wobble);
+    float r = RADIUS + 0.1 * cos(atan(uv.y, uv.x) * float(NUM_POINTS) + iTime + d * wobble);
 
     // Apply SDF to colour
     col *= smoothstep(r, r + FEATHER, d);

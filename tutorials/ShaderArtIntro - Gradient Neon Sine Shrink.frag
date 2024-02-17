@@ -1,16 +1,16 @@
 // Tutorial: https://www.youtube.com/watch?v=f4s1h2YETNY
 
-vec3 palette( float t )
+vec3 palette(float t)
 {
     vec3 a = vec3(0.5, 0.5, 0.5);
     vec3 b = vec3(0.5, 0.5, 0.5);
     vec3 c = vec3(1.0, 1.0, 1.0);
     vec3 d = vec3(0.263, 0.416, 0.557);
 
-    return a + b*cos( 6.28318*(c*t+d) );
+    return a + b * cos(6.28318 * (c * t + d));
 }
 
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {
     // Normalise resolution to +/-1 canvas with centred origin
     // Also account for aspect ratio to avoid stretching

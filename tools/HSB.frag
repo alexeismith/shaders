@@ -11,10 +11,10 @@ vec3 rgb2hsb(in vec3 c)
     return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
 }
 
-vec3 hsb2rgb( in vec3 c ){
-    vec3 rgb = clamp( abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),6.0)-3.0)-1.0, 0.0, 1.0 );
-	rgb = rgb*rgb*(3.0-2.0*rgb); // cubic smoothing	
-	return c.z * mix( vec3(1.0), rgb, c.y);
+vec3 hsb2rgb(in vec3 c) {
+    vec3 rgb = clamp(abs(mod(c.x * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0);
+    rgb = rgb * rgb * (3.0 - 2.0 * rgb); // cubic smoothing
+    return c.z * mix(vec3(1.0), rgb, c.y);
 }
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord)
@@ -25,7 +25,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
 
     // We map x (0.0 - 1.0) to the hue (0.0 - 1.0)
     // And the y (0.0 - 1.0) to the brightness
-    vec3 color = hsb2rgb(vec3(uv.x,1.0,uv.y));
+    vec3 color = hsb2rgb(vec3(uv.x, 1.0, uv.y));
 
-    fragColor = vec4(color,1.0);
+    fragColor = vec4(color, 1.0);
 }

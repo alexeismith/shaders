@@ -1,17 +1,17 @@
 // Tutorial: https://www.youtube.com/watch?v=f4s1h2YETNY
 precision mediump float;
 
-vec3 palette( float t )
+vec3 palette(float t)
 {
     vec3 a = vec3(0.5, 0.5, 0.5);
     vec3 b = vec3(0.5, 0.5, 0.5);
     vec3 c = vec3(2.0, 1.0, 1.0);
     vec3 d = vec3(0.0, 0.25, 0.25);
-    
-    return a + b*cos( 6.28318*(c*t+d) );
+
+    return a + b * cos(6.28318 * (c * t + d));
 }
 
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {
     // float time = iTime * 2.0;
 
@@ -34,7 +34,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
         // Now use d value to control the brightness of a custom colour
         // Note the rgb components don't need to be normalised at this point
-        vec3 col = palette(length(uv0) + iTime*0.4);
+        vec3 col = palette(length(uv0) + iTime * 0.4);
 
         // Use d as input to sine function, and increase frequency to get repeating pattern
         d = sin(d * 8.0 - iTime) / 8.0;

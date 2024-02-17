@@ -1,8 +1,7 @@
 #define PI 3.14159265359
 
 float plot (float x, float y){
-    return (smoothstep(x-0.01, x, y) -
-            smoothstep(x, x+0.01, y));
+    return (smoothstep(x-0.01, x, y) - smoothstep(x, x+0.01, y));
 }
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord )

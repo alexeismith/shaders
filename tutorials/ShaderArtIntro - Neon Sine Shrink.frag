@@ -1,6 +1,6 @@
 // Tutorial: https://www.youtube.com/watch?v=f4s1h2YETNY
 
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {
     // Normalise resolution to +/-1 canvas with centred origin
     // Also account for aspect ratio to avoid stretching
