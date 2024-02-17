@@ -25,6 +25,11 @@ float bounceOut(float t) {
         : 10.8 * t * t - 20.52 * t + 10.72;
 }
 
+float random(vec2 normSeed)
+{
+    return fract(sin(dot(normSeed.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
     // Normalise resolution to +/-1 canvas with centred origin
@@ -47,7 +52,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         uvTrans.x -= xOffset;
 
         // Create time offset for this ball
-        timeOffset = TIME_OFFSET * float(i);
+        timeOffset = random(vec2(i,0.0)) * float(i);
 
         // Animate value in range 0-1
         anim = mod(iTime * SPEED + timeOffset, 1.0);
