@@ -35,6 +35,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     float d = length(uv - vec2(0, 0));
 
     // Draw circle SDF
+    // To create white ball, arguments to step function are reversed
     vec3 col = vec3(step(d, SIZE));
 
     // Output to screen
