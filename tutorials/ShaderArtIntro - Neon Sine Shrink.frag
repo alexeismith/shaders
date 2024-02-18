@@ -19,7 +19,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
 
     // Use inverse function (y = 1/x) to get neon glow effect
     // Scale down so that normalised input produces some output below 1.0
-    d = 0.02 / d;
+    d = 0.01 / d;
 
     // Now use d value to control the brightness of a custom colour
     // Note the rgb components don't need to be normalised at this point
