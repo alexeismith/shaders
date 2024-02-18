@@ -1,5 +1,5 @@
 // PARAMETERS
-#define SPEED (0.5)
+#define SPEED (0.3)
 #define SIZE (0.2)
 #define NUM_BALLS (15)
 #define TIME_OFFSET (0.3)
