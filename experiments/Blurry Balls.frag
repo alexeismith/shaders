@@ -25,7 +25,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     // Also account for aspect ratio to avoid stretching
     vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
 
-    // Initialize black background colour
+    // Initialise black background colour
     vec3 col = vec3(0.0);
 
     float r, angle, d;
@@ -41,8 +41,10 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
         // Create radius to offset ball from origin
         r = SPREAD * random(vec2(i, 0.0)) + 0.2;
 
-        // Create angle to rotate ball around origin
-        angle = 2.0 * PI * random(vec2(i, 0.0)) + SPEED * iTime * random(vec2(0.0, i));
+        // Initialise angle to rotate ball around origin
+        angle = 2.0 * PI * random(vec2(i, 0.0));
+        // Animate angle by randomly scaling iTime
+        angle += iTime * (random(vec2(0.0, i)) - 0.5) * SPEED;
 
         // Convert polar coords to cartesian
         uvTrans.x += r * cos(angle);
