@@ -35,14 +35,17 @@ Shaders made as part of step-by-step tutorials.
 
 This repo is designed to be used with VS Code.
 
+To render a shader:
 1. In VS Code, install the [Shader Toy](https://marketplace.visualstudio.com/items?itemName=stevensona.shader-toy) extension
 2. Open a shader file (.frag)
 3. Inside the file, right-click -> Shader Toy: Show GLSL Preview
-4. Drag the new tab to the side to get a split view
+4. To see the code alongside in a split view, drag the tab over one half of the screen 
 
 For auto-formatting in VS Code:
 1. Install the [glsl_analyzer](https://marketplace.visualstudio.com/items?itemName=nolanderc.glsl-analyzer) extension
 2. When editing a file, press ALT+SHIFT+F 
+
+For Linting, install the [Shader languages support for VS Code](https://marketplace.visualstudio.com/items?itemName=slevesque.shader) extension
 
 ## Learning Resources
 
@@ -51,6 +54,8 @@ For auto-formatting in VS Code:
 [Articles by Inigo Quilez](https://iquilezles.org/articles/)
 
 [The Book of Shaders](https://thebookofshaders.com/)
+
+[Mini Shader Tutorials by XOR](https://substack.com/@xordev)
 
 ### Online Tools
 
