@@ -1,9 +1,9 @@
 // PARAMETERS
-#define SPEED (0.6)
-#define SIZE (0.5)
-#define NUM_BALLS (6)
-#define SPREAD (0.3)
-#define BLUR (0.3)
+#define SPEED (0.5)
+#define SIZE (0.55)
+#define NUM_BALLS (8)
+#define SPREAD (0.18)
+#define BLUR (0.35)
 
 #define PI 3.14159265359
 
@@ -44,7 +44,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
         // Initialise angle to rotate ball around origin
         angle = 2.0 * PI * random(vec2(i, 0.0));
         // Animate angle by randomly scaling iTime
-        angle += iTime * (random(vec2(0.0, i + 2)) - 0.5) * SPEED;
+        angle += iTime * (random(vec2(0.0, i)) - 0.5) * SPEED;
 
         // Convert polar coords to cartesian
         uvTrans.x += r * cos(angle);
@@ -54,7 +54,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
         d = length(uvTrans - vec2(0, 0));
 
         // Create a random hue for this ball
-        fill = hsb2rgb(vec3(random(vec2(i, 0.0)), 0.8, 0.8));
+        fill = hsb2rgb(vec3(random(vec2(i, 0.0)), 0.8, 0.6));
         // Attenuate green channel, to reduce whites when balls overlap
         fill.g *= 0.5;
 
