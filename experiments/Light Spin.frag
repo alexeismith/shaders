@@ -1,7 +1,7 @@
 // PARAMETERS
 #define SIZE (0.4)
 #define RADIUS (0.4)
-#define NUM_BALLS (10)
+#define NUM_BALLS (20)
 #define SPREAD (0.3)
 #define BLUR (0.3)
 
@@ -39,7 +39,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
         // Create translated uv for this ball
         uvTrans = uv;
 
-        offset = 0.005 * float(i * i);
+        offset = 0.002 * float(i * i);
         angle = PI * (sinSteep(mod(iTime - offset, PI) + 0.5 * PI, 3.5) + 1.0);
 
         // Convert polar coords to cartesian
@@ -50,7 +50,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
         d = length(uvTrans - vec2(0, 0));
 
         // Rainbow hue
-        fill = hsb2rgb(vec3(float(i) * 0.03 + iTime * 0.05, 0.7, 0.35));
+        fill = hsb2rgb(vec3(float(i) * 0.03 + iTime * 0.05, 0.7, 0.35 - float(i) * 0.02));
         
         // Attenuate green channel for a more aesthetic palette
         fill.g *= 0.5;
