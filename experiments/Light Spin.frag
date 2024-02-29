@@ -1,9 +1,9 @@
 // PARAMETERS
-#define SIZE (0.4)
+#define SIZE (0.3)
 #define RADIUS (0.4)
 #define NUM_BALLS (20)
 #define SPREAD (0.3)
-#define BLUR (0.3)
+#define BLUR (0.2)
 
 #define PI 3.14159265359
 
