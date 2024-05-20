@@ -28,7 +28,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     // Initialise black background colour
     vec3 col = vec3(0.0);
 
-    float r, angle, d;
+    float d;
     vec2 uvTrans;
     vec3 fill;
 
@@ -38,6 +38,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
         // Create translated uv for this ball
         uvTrans = uv;
 
+        // Offset ball on x axis
         uvTrans.x += SPREAD * sin(iTime * (random(vec2(0.0, i)) - 0.5) * SPEED);
 
         // Measure distance from (translated) origin

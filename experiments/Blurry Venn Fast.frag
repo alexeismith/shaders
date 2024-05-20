@@ -12,13 +12,6 @@ float random(vec2 normSeed)
     return fract(sin(dot(normSeed.xy, vec2(12.9898, 78.233))) * 43758.5453123);
 }
 
-vec3 hsb2rgb(in vec3 c)
-{
-    vec3 rgb = clamp(abs(mod(c.x * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0);
-    rgb = rgb * rgb * (3.0 - 2.0 * rgb); // cubic smoothing
-    return c.z * mix(vec3(1.0), rgb, c.y);
-}
-
 vec3 palette(float t)
 {
     vec3 a = vec3(0.758, 0.288, 0.678); // DC Offset
@@ -38,7 +31,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     // Initialise black background colour
     vec3 col = vec3(0.0);
 
-    float r, angle, d;
+    float d;
     vec2 uvTrans;
     vec3 fill;
 
@@ -48,13 +41,14 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
         // Create translated uv for this ball
         uvTrans = uv;
 
+        // Offset ball on x axis
         uvTrans.x += SPREAD * sin(iTime * (random(vec2(0.0, i)) - 0.5) * SPEED);
 
         // Measure distance from (translated) origin
         d = length(uvTrans - vec2(0, 0));
 
-        // Create a random hue for this ball
-        fill = 0.6 * palette(float(i) * (2.0 / float(NUM_BALLS)) + iTime * 0.1 * SPEED);
+        // Create a random hue for this ball, animated over time
+        fill = 0.5 * palette(float(i) * (2.0 / float(NUM_BALLS)) + iTime * 0.1 * SPEED);
 
         // Multiply fill colour by circle SDF
         col += fill * vec3(smoothstep(d, d + BLUR, SIZE));
