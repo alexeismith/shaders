@@ -2,7 +2,7 @@
 #define SPEED (3.0)
 #define SIZE (0.6)
 #define NUM_BALLS (7)
-#define SPREAD (0.2)
+#define SPREAD (0.1)
 #define BLUR (0.4)
 
 #define PI 3.14159265359
@@ -60,7 +60,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
         fill = 0.5 * palette(float(i) * (2.0 / float(NUM_BALLS)) + iTime * 0.1 * SPEED);
 
         // TODO: Try and use more interesting shape for shadows, maybe a hand?
-        col += fill * d - 0.05;
+        col += fill * d * 0.9 - 0.05;
     }
 
     // Taper brightness
