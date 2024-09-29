@@ -32,7 +32,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     uv.y += 2.0 * (bounceOut(anim) - 0.5) - SIZE;
 
     // Measure distance from (translated) origin
-    float d = length(uv - vec2(0, 0));
+    float d = length(uv);
 
     // Draw circle SDF
     // To create white ball, arguments to step function are reversed
