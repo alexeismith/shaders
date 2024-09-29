@@ -11,6 +11,12 @@ float sdPentagon(in vec2 p, in float r)
     return length(p) * sign(p.y);
 }
 
+// https://math.stackexchange.com/a/4031938/1291329
+float sinSteep(in float x, in float steepness)
+{
+    return atan(steepness * sin(x)) / atan(steepness);
+}
+
 vec2 rotateUV(vec2 uv, float rotation, vec2 mid)
 {
     return vec2(
@@ -35,6 +41,7 @@ vec3 palette(float t)
 #define COLOUR_SPEED 0.1
 #define COLOUR_GRAD_LENGTH 0.04
 #define BRIGHTNESS 0.08
+#define NUM_LAYERS 20
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {
@@ -42,21 +49,35 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     // Also account for aspect ratio to avoid stretching
     vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
 
+    // Slowly rotate entire scene
+    uv = rotateUV(uv, iTime * 0.03, vec2(0.0));
+
+    // Initialise colour 
     vec3 col = vec3(0.0);
 
-    float b;
+    // Steep sine animation
+    float anim = sinSteep(iTime, 1.8) * 0.8;
 
-    float s = cos(iTime);
+    float shape;
+    vec3 layerCol;
 
-    for (int i = 1; i < 20; i++)
+    // Iterate over layers
+    for (int i = 1; i < NUM_LAYERS; i++)
     {
-        uv = rotateUV(uv, s * PI * ROT_SPEED, vec2(0.0));
+        // Rotate this layer
+        // The rotation compounds as the loop continues
+        uv = rotateUV(uv, anim * PI * ROT_SPEED, vec2(0.0));
 
-        b = sdPentagon(uv, float(i) * SCALE);
-        b = step(0.0, b);
-        b = 1.0 - b;
+        // Create pentagon SDF
+        shape = sdPentagon(uv, float(i) * SCALE);
+        shape = step(0.0, shape);
+        shape = 1.0 - shape;
 
-        col += BRIGHTNESS * b * palette(iTime * COLOUR_SPEED + float(i) * COLOUR_GRAD_LENGTH);
+        // Set up colour for this layer
+        layerCol = palette(iTime * COLOUR_SPEED + float(i) * COLOUR_GRAD_LENGTH);
+
+        // Add layer to output colour
+        col += BRIGHTNESS * shape * layerCol;
     }
 
     // Output to screen

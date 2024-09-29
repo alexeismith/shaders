@@ -1,9 +1,9 @@
 // PARAMETERS
-#define SPEED (0.6)
-#define SIZE (0.5)
-#define NUM_BALLS (6)
-#define SPREAD (0.3)
-#define BLUR (0.3)
+#define SPEED (3.0)
+#define SIZE (0.6)
+#define NUM_BALLS (7)
+#define SPREAD (0.1)
+#define BLUR (0.4)
 
 #define PI 3.14159265359
 
@@ -12,11 +12,14 @@ float random(vec2 normSeed)
     return fract(sin(dot(normSeed.xy, vec2(12.9898, 78.233))) * 43758.5453123);
 }
 
-vec3 hsb2rgb(in vec3 c)
+vec3 palette(float t)
 {
-    vec3 rgb = clamp(abs(mod(c.x * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0);
-    rgb = rgb * rgb * (3.0 - 2.0 * rgb); // cubic smoothing
-    return c.z * mix(vec3(1.0), rgb, c.y);
+    vec3 a = vec3(0.758, 0.288, 0.678); // DC Offset
+    vec3 b = vec3(0.298, 0.375, 0.426); // Amp
+    vec3 c = vec3(1.413, 0.878, 0.168); // Freq
+    vec3 d = vec3(-0.292, 4.920, 0.176); // Phase
+
+    return a + b * cos(6.28318 * (c * t + d));
 }
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord)
@@ -44,7 +47,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
         // Initialise angle to rotate ball around origin
         angle = 2.0 * PI * random(vec2(i, 0.0));
         // Animate angle by randomly scaling iTime
-        angle += iTime * (random(vec2(0.0, i + 2)) - 0.5) * SPEED;
+        angle += iTime * (random(vec2(0.0, i)) - 0.5) * SPEED;
 
         // Convert polar coords to cartesian
         uvTrans.x += r * cos(angle);
@@ -53,13 +56,11 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
         // Measure distance from (translated) origin
         d = length(uvTrans - vec2(0, 0));
 
-        // Create a random hue for this ball
-        fill = hsb2rgb(vec3(random(vec2(i, 0.0)), 0.8, 0.8));
-        // Attenuate green channel, to reduce whites when balls overlap
-        fill.g *= 0.5;
+        // Create a random hue for this ball, animated over time
+        fill = 0.5 * palette(float(i) * (2.0 / float(NUM_BALLS)) + iTime * 0.1 * SPEED);
 
-        // Multiply fill colour by circle SDF
-        col += fill * vec3(smoothstep(d, d + BLUR, SIZE));
+        // TODO: Try and use more interesting shape for shadows, maybe a hand?
+        col += fill * d * 0.9 - 0.05;
     }
 
     // Taper brightness
