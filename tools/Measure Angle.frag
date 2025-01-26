@@ -4,7 +4,8 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {
     // Normalise resolution to +/-1 canvas with centred origin
     // Also account for aspect ratio to avoid stretching
-    vec2 uv = (fragCoord * 2.0 - iResolution.xy) / iResolution.y;
+    float minres = min(iResolution.x, iResolution.y);
+    vec2 uv = (fragCoord * 2.0 - iResolution.xy) / minres;
 
     // Red base colour
     vec3 col = vec3(1.0, 0.0, 0.0);
