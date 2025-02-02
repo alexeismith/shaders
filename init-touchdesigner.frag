@@ -2,7 +2,8 @@
 out vec4 fragColor;
 
 // Inputs are configured in the Vectors tab of GLSL properties
-uniform vec4 uInput;
+uniform vec4 iTime;
+uniform vec4 uSlider;
 
 void main()
 {
@@ -13,10 +14,16 @@ void main()
     // Also account for aspect ratio to avoid stretching
     float minres = min(iResolution.x, iResolution.y);
     vec2 uv = (gl_FragCoord.xy * 2.0 - iResolution.xy) / minres;
+    
+    // Flip uv using time
+    uv *= sin(iTime.x * 0.01);
 	
     // Use input unform for brightness
-	vec3 color = vec3(uv * uInput.x, 0.0);
+	vec4 color = vec4(uv * uSlider.x, 0.0, 1.0);
+	
+	// Reduce colour banding using dither
+	color = TDDither(color);
 	
     // Output must be wrapped in TDOutputSwizzle for cross-platform compat
-	fragColor = TDOutputSwizzle(vec4(color, 1.0));
+	fragColor = TDOutputSwizzle(color);
 }
