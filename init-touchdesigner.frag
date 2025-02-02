@@ -1,6 +1,8 @@
+// Output color is declared manually
 out vec4 fragColor;
 
-uniform vec4 vectorIn;
+// Inputs are configured in the Vectors tab of GLSL properties
+uniform vec4 uInput;
 
 void main()
 {
@@ -13,7 +15,7 @@ void main()
     vec2 uv = (gl_FragCoord.xy * 2.0 - iResolution.xy) / minres;
 	
     // Use input unform for brightness
-	vec3 color = vec3(uv * vectorIn.x, 0.0);
+	vec3 color = vec3(uv * uInput.x, 0.0);
 	
     // Output must be wrapped in TDOutputSwizzle for cross-platform compat
 	fragColor = TDOutputSwizzle(vec4(color, 1.0));
