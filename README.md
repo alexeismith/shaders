@@ -57,6 +57,11 @@ For Linting, install the [Shader languages support for VS Code](https://marketpl
 
 [Mini Shader Tutorials by XOR](https://substack.com/@xordev)
 
+[Shadertoy - Unofficial Blog](https://shadertoyunofficial.wordpress.com/)
+
+[Tone Mapping](https://64.github.io/tonemapping/)
+  - [Tone Mapping Comparison GLSL](https://www.shadertoy.com/view/lslGzl)
+
 ### Online Tools
 
 [Graphtoy](https://graphtoy.com/)
